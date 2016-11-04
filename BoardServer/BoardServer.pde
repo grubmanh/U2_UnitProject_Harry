@@ -23,10 +23,10 @@ Player[] players = new Player[6];
 
 void setup()
 {
-  fullScreen();
+  size(fullScreen);
   background(0);
   stroke(255);
-  // frameRate(5); // Slow it down a little
+  frameRate(5); // Slow it down a little
   s = new Server(this, 12345); // Start a simple server on a port
   for (int i = 0; i < 6; i++)
   players[i] = new Player(i);

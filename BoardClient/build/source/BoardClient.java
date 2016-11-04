@@ -31,15 +31,15 @@ public class BoardClient extends PApplet {
 
 Client c;
 String input;
-int data[];
+String data[];
 int number = 0;
-String stage = "startup";
-String player1 = "Bob";
-String player2 = "- NOT JOINED -";
-String player3 = "- NOT JOINED -";
-String player4 = "- NOT JOINED -";
-String player5 = "- NOT JOINED -";
-Boolean initialized = false;
+String stage = "initialize";
+String player0 = "BOB";
+String player1 = "BOB1";
+String player2 = "BOB3";
+String player3 = "NED";
+String player4 = "NOTNED";
+String player5 = "NOTJOE";
 
 public void setup()
 {
@@ -49,55 +49,62 @@ public void setup()
   textAlign(CENTER, CENTER);
   textSize(25);
   text("Connecting...", width/2, height/2);
-  //frameRate(10); // Slow it down a little
+  frameRate(10); // Slow it down a little
   // Connect to the server's IP address and port
-  c = new Client(this, "127.0.0.1", 12345); // Replace with your server's IP and port
+  c = new Client(this, "139.59.36.37", 12345); // Replace with your server's IP and port
+  // while (c.available() <= 0)
+  // {
+  //     text("Connecting...", width/2, height/2);
+  // }
 }
 
 public void draw()
 {
-  if (initialized == false)
+  if (stage == "initialize")
   {
     background(0);
-    c.write("initialize" + ' ' + player1 + ' ' + player2 + ' ' + player3 + ' ' + player4 + ' ' + player5 + "\n");
-    initialized = true;
+    c.write("initialize" + ' ' + player0 + ' ' + player1 + ' ' + player2 + ' ' + player3 + ' ' + player4 + ' ' + player5 + "\n");
+    // stage = "startup";
   }
-  if (stage == "startup")
-  {
-    background(255);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    textSize(25);
-    text("Press any key to begin", width/2, height/2);
-    if (keyPressed == true)
-    {
-      stage = "counter";
-      println(stage);
-    }
-    if (!keyPressed)
-    {
-      println(stage);
-    }
-  }
-  if (stage == "counter")
-  {
-    background(255);
-    fill(0);
-    textAlign(CENTER, CENTER);
-    text(number, width/2, height/2);
-    //if (keyPressed == true) {
-      // Draw our line
-      if (key == 'w')
-      {
-        number ++;
-      }
-      if (key == 's')
-      {
-        number --;
-      }
-      // Send command to other person
-      // c.write(number + "\n");
-  }
+  // if (stage == "startup")
+  // {
+  //   background(255);
+  //   fill(0);
+  //   textAlign(CENTER, CENTER);
+  //   textSize(25);
+  //   text("Press any key to begin", width/2, height/2);
+  //   if (keyPressed == true)
+  //   {
+  //     stage = "counter";
+  //   }
+  // }
+  // if (stage == "counter")
+  // {
+  //   background(255);
+  //   fill(0);
+  //   textAlign(CENTER, CENTER);
+  //   text(number, width/2, height/2);
+  //     // void keyPressed()
+  //     // {
+  //     c.write("initialize" + ' ' + "BOB" + ' ' + "BILL" + ' ' + "JOE" + ' ' + "JEFF" +' ' + "QUEEN" + ' ' + "BEEF" + "\n");
+  //       if (key == 'w')
+  //       {
+  //         c.write("points" + ' ' + 0 + ' ' + 150+ "\n");
+  //       }
+  //       if (key == 's')
+  //       {
+  //         c.write("points" + ' ' + 0 + ' ' + -150 + "\n");
+  //       }
+  //       if (key == 'e')
+  //       {
+  //         c.write("points" + ' ' + 1 + ' ' + 150+ "\n");
+  //       }
+  //       if (key == 'd')
+  //       {
+  //         c.write("points" + ' ' + 1 + ' ' + -150 + "\n");
+  //       }
+  //     // }
+  // }
     // Receive data from server
     //if (c.available() > 0) {
     //  input = c.readString();
@@ -109,6 +116,28 @@ public void draw()
     //}
   }
 //}
+
+// void userInput(String variable, int maxLength)
+// {
+//   // if (keyPressed()) // Adapted from Amnon.p5
+//   // {
+//   //   if (keyCode == BACKSPACE)
+//   //   {
+//   //     if (variable.length() > 0)
+//   //     {
+//   //       variable = variable.substring(0, variable.length()-1);
+//   //     }
+//   //   }
+//   //   else if (keyCode == DELETE)
+//   //   {
+//   //     variable = "";
+//   //   }
+//   //   else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT && variable.length() < maxLength)
+//   //   {
+//   //     variable = variable + key;
+//   //   }
+//   // }
+// }
   public void settings() {  size(450, 255); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "BoardClient" };

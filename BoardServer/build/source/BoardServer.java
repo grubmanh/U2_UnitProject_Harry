@@ -44,7 +44,7 @@ public void setup()
   
   background(0);
   stroke(255);
-  // frameRate(5); // Slow it down a little
+  frameRate(5); // Slow it down a little
   s = new Server(this, 12345); // Start a simple server on a port
   for (int i = 0; i < 6; i++)
   players[i] = new Player(i);
@@ -166,7 +166,7 @@ public void ranker()
     j = 1;
   }
 }
-  public void settings() {  fullScreen(); }
+  public void settings() {  size(300, 300); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "BoardServer" };
     if (passedArgs != null) {
